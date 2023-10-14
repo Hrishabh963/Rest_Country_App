@@ -22,7 +22,7 @@ export default {
             backgroundImage: {
                 'search_light_mode': 'url(/src/Components/assets/icon_light.png)',
                 'search_dark_mode': 'url(/src/Components/assets/icon_dark.png)'
-            }
+            },
         },
     },
     plugins: [],
