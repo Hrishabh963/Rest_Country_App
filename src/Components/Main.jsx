@@ -52,7 +52,6 @@ const Main = () => {
               return country;
             }
           });
-          console.log(newData);
          setFilterData(newData);
         }else{
           setFilterData(undefined)
@@ -66,7 +65,7 @@ const Main = () => {
   return (
     <>
     <Input handleChange={handleChange} handleSelect={handleSelect} />
-    <main className='flex flex-col items-center bg-Very_Light_Gray desktop:flex-row desktop:flex-wrap desktop:justify-center'>
+    <main className='flex flex-col items-center min-h-screen desktop:items-stretch bg-Very_Light_Gray desktop:flex-row desktop:flex-wrap desktop:justify-center dark:bg-Very_Dark_Blue'>
     {!filterData && input==='' && countryData && countryData.map((country,index)=>{
         return <Country key={index} name={country.name.official} flag={country.flags.png} population={country.population} region={country.region} capital={country.capital} />
     })}

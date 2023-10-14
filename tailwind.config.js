@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: 'class',
     content: [
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
@@ -18,6 +19,10 @@ export default {
                 'mobile': "389px",
                 'desktop': "790px"
             },
+            backgroundImage: {
+                'search_light_mode': 'url(/src/Components/assets/icon_light.png)',
+                'search_dark_mode': 'url(/src/Components/assets/icon_dark.png)'
+            }
         },
     },
     plugins: [],
