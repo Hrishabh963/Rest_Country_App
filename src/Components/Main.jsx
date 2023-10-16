@@ -2,7 +2,6 @@ import { useEffect, useState ,useRef} from 'react'
 import CountriesContainer from './CountriesContainer';
 import Input from './Input';
 import Loading from './Loading';
-import SearchError from './SearchError';
 import Error from './Error';
 import { fetchAllCountries,fetchCountriesByRegion } from './apiService';
 
@@ -87,7 +86,7 @@ const Main = () => {
  // JSX rendering logic
   return (
     <>
-    <main className='bg-Very_Light_Gray min-h-screen w-screen pl-4 dark:bg-Very_Dark_Blue'>
+    <main className="bg-Very_Light_Gray min-h-screen w-screen pl-4 dark:bg-Very_Dark_Blue">
 
     <Input handleChange={handleChange} handleSelect={handleSelect} />
 
@@ -95,9 +94,9 @@ const Main = () => {
 
     {error.error ? <Error message={error.errorMessage} /> : null}
 
-    {filterData.length === 0 && input!=='' && <SearchError />}
+    {filterData.length === 0 && input!=='' && !loading && <Error message="Country not found" /> }
 
-    <div className='flex flex-col items-center  w-screen desktop:items-stretch desktop:flex-row desktop:flex-wrap desktop:mt-0 desktop:mb-0 desktop:ml-auto desktop:mr-auto desktop:pl-8'>
+    <div className="flex flex-col items-center  w-screen desktop:items-stretch desktop:flex-row desktop:flex-wrap desktop:mt-0 desktop:mb-0 desktop:ml-auto desktop:mr-auto desktop:pl-8">
       {filterData.length === 0 && input==='' && countryData.length>0 && <CountriesContainer countryData={countryData} />}
       {filterData.length>0 && input!=='' && <CountriesContainer countryData={filterData} /> }
     </div>
