@@ -20,8 +20,8 @@ export default {
                 'desktop': "790px"
             },
             backgroundImage: {
-                'search_light_mode': 'url(/public/assets/icon_light.png)',
-                'search_dark_mode': 'url(/public/assets/icon_dark.png)'
+                'search_light_mode': 'url(/assets/icon_light.png)',
+                'search_dark_mode': 'url(/assets/icon_dark.png)'
             },
         },
     },

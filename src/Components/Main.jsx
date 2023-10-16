@@ -3,6 +3,8 @@ import React, { useEffect, useState ,useRef} from 'react'
 import Country from './Country';
 import Input from './Input';
 import Loading from './Loading';
+import SearchError from './SearchError';
+import Error from './Error';
 
 const Main = () => {
     const [countryData,setCountryData] = useState();
@@ -10,6 +12,10 @@ const Main = () => {
     const [input,setInput] = useState('');
     const [currentRegion,setRegion] = useState('');
     const [loading,setLoading] = useState(false);
+    const [error,setError] = useState({
+      error:false,
+      errorMessage:undefined
+    });
     const initial = useRef(true);
 
 
@@ -24,6 +30,7 @@ const Main = () => {
 
     useEffect(()=>{
       setLoading(true);
+      setError({error:false})
         if(initial.current){
           setTimeout(()=>{
             axios.get('https://restcountries.com/v3.1/all')
@@ -31,8 +38,11 @@ const Main = () => {
               setLoading(false);
               setCountryData(res.data)
             })
-            .catch(error => console.log(error));
-          },4000)
+            .catch(error =>{
+              setLoading(false);
+              setError({error:true,errorMessage:error.message})
+            });
+          },500)
         }
         else{
           if(currentRegion!==''){
@@ -42,7 +52,10 @@ const Main = () => {
               setLoading(false);
               setCountryData(res.data)
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+              setLoading(false);
+              setError({error:true,errorMessage:error.message})
+            });
           }
         }
     },[currentRegion])
@@ -62,8 +75,10 @@ const Main = () => {
                 return country;
               }
             });
-           setFilterData(newData);
+
+            setFilterData(newData);
            setLoading(false);
+           
         }else{
           setFilterData(undefined)
           setLoading(false)
@@ -82,15 +97,20 @@ const Main = () => {
 
     {loading && <Loading />}
 
-    <div className='flex flex-col items-center  w-[94vw] desktop:items-stretch desktop:flex-row desktop:flex-wrap desktop:mt-0 desktop:mb-0 desktop:ml-auto desktop:mr-0'>
+    {error.error && <Error message={error.errorMessage} />}
 
-    {!filterData && input==='' && countryData && countryData.map((country,index)=>{
+    {filterData && filterData.length === 0 && input!=='' && !loading && <SearchError />}
+
+    <div className='flex flex-col items-center  w-screen desktop:items-stretch desktop:flex-row desktop:flex-wrap desktop:mt-0 desktop:mb-0 desktop:ml-auto desktop:mr-auto desktop:pl-8'>
+
+    {!filterData && input==='' && !loading && countryData && countryData.map((country,index)=>{
         return <Country key={index} name={country.name.official} flag={country.flags.png} population={country.population} region={country.region} capital={country.capital} />
     })}
 
-    {filterData && input!=='' && filterData.map((country,index)=>{
+    {filterData && input!=='' && !loading && filterData.map((country,index)=>{
       return <Country key={index} name={country.name.official} flag={country.flags.png} population={country.population} region={country.region} capital={country.capital} />
     })}
+
 
     </div>
     
