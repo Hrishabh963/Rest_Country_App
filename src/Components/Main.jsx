@@ -12,6 +12,7 @@ const Main = () => {
   const [currentRegion, setRegion] = useState('');
   const [loading, setLoading] = useState(false);
   const [subRegion,setSubRegion] = useState('');
+  const [sort,setSort] = useState('');
   const [error, setError] = useState({
     error: false,
     errorMessage: undefined
@@ -31,6 +32,10 @@ const Main = () => {
   //Handle subregion selection
   const handleSubRegionSelect = (value)=>{
     setSubRegion(value);
+  }
+
+  const toggleSort = (value)=>{
+    setSort(value);
   }
   // Fetch country data
   useEffect(() => {
@@ -69,13 +74,21 @@ const Main = () => {
         return subregion.includes(userSubregion);
       }
     })
+    if(sort!==''){
+      filteredData.sort((a,b)=>{
+        if(sort === 'ascending'){
+          return a.population > b.population;
+        }
+        return a.population < b.population;
+      })
+    }
     
  // JSX rendering logic
   return (
     <>
     <main className="bg-Very_Light_Gray min-h-screen w-screen pl-4 dark:bg-Very_Dark_Blue">
 
-    <Input handleChange={handleChange} handleSelect={handleSelect} countryData={countryData} region={currentRegion} handleSubRegionSelect={handleSubRegionSelect} />
+    <Input handleChange={handleChange} handleSelect={handleSelect} countryData={countryData} region={currentRegion} handleSubRegionSelect={handleSubRegionSelect} toggleSort={toggleSort} />
 
     {loading ? <Loading /> : null}
 
