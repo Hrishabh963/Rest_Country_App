@@ -4,6 +4,8 @@ import Input from './Input';
 import Loading from './Loading';
 import Error from './Error';
 import { fetchAllCountries } from './apiService';
+import Sort from './Sort';
+import { filterData, sortData } from './utility';
 
 const Main = () => {
   // State variables
@@ -12,7 +14,8 @@ const Main = () => {
   const [currentRegion, setRegion] = useState('');
   const [loading, setLoading] = useState(false);
   const [subRegion,setSubRegion] = useState('');
-  const [sort,setSort] = useState('');
+  const [sort,setSort] = useState('ascending');
+  const [sortType,setSortType] = useState('');
   const [error, setError] = useState({
     error: false,
     errorMessage: undefined
@@ -34,9 +37,17 @@ const Main = () => {
     setSubRegion(value);
   }
 
+  //Toggling ascending or descending
   const toggleSort = (value)=>{
-    setSort(value);
+    setSort(value.toLowerCase());
   }
+
+  //Toggling sort type
+
+  const toggleSortType = (value)=>{
+    setSortType(value.toLowerCase());
+  }
+
   // Fetch country data
   useEffect(() => {
     setLoading(true);
@@ -56,43 +67,21 @@ const Main = () => {
   }, []);
 
   // Filter country data based on user input
-  const filteredData = countryData.filter((country)=>{   //Filter based on region
-      const region = country.region.toLowerCase();
-      const userRegion = currentRegion.toLowerCase();
-      return region.includes(userRegion);
-    })
-    .filter((country)=>{                                 //Filter based on Input
-      const name = country.name.official.toLowerCase();
-      const userInput = input.toLowerCase();
-      return name.includes(userInput);
-    })
-    .filter((country)=>{                                //Filter based on Subregion
-      if(!country.subregion) return true;
-      else{
-        const subregion = country.subregion.toLowerCase();
-        const userSubregion = subRegion.toLowerCase();
-        return subregion.includes(userSubregion);
-      }
-    })
-    if(sort!==''){
-      filteredData.sort((a,b)=>{
-        if(sort === 'ascending'){
-          return a.population > b.population;
-        }
-        return a.population < b.population;
-      })
-    }
+  let filteredData = filterData(countryData,currentRegion,subRegion,input);
+  filteredData = sortData(filteredData,sortType,sort); 
     
  // JSX rendering logic
   return (
     <>
     <main className="bg-Very_Light_Gray min-h-screen w-screen pl-4 dark:bg-Very_Dark_Blue">
 
-    <Input handleChange={handleChange} handleSelect={handleSelect} countryData={countryData} region={currentRegion} handleSubRegionSelect={handleSubRegionSelect} toggleSort={toggleSort} />
+    {error.error ? <Error message={error.errorMessage} /> : null}
 
     {loading ? <Loading /> : null}
+    
+    {!loading && <Input handleChange={handleChange} handleSelect={handleSelect} countryData={countryData} region={currentRegion} handleSubRegionSelect={handleSubRegionSelect} toggleSort={toggleSort} />}
 
-    {error.error ? <Error message={error.errorMessage} /> : null}
+    {!loading && <Sort  toggleSort={toggleSort} toggleSortType={toggleSortType} />}
 
     {filteredData.length === 0 && countryData.length>0 && <Error message="Country Not Found" />}
 
