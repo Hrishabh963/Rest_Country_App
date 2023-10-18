@@ -21,7 +21,9 @@ export default {
             },
             backgroundImage: {
                 'search_light_mode': 'url(/assets/icon_light.png)',
-                'search_dark_mode': 'url(/assets/icon_dark.png)'
+                'search_dark_mode': 'url(/assets/icon_dark.png)',
+                'arrow_light_mode': 'url(/assets/arrow_light.png)',
+                'arrow_dark_mode': 'url(/assets/arrow_dark.png)'
             },
         },
     },

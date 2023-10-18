@@ -4,7 +4,7 @@ const CountriesContainer = ({countryData}) => {
   return (
     <>
       {countryData.map((country,index)=>{
-          return <Country key={index} name={country.name.official} flag={country.flags.png} population={country.population} region={country.region} capital={country.capital} />
+          return <Country key={index} name={country.name.official} flag={country.flags.png} population={country.population} cca2={country.cca2} region={country.region} capital={country.capital}  />
       })}
     </>
   )

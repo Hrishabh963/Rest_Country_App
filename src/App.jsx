@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
+import { Routes , Route } from 'react-router-dom'
+import CountryData from './Components/CountryData'
+import Main from './Components/Main' 
 import Header from './Components/Header'
-import Main from './Components/Main'
-
 const App = () => {
   const [loading,setLoading] = useState(false);
   return (
     <>
-      <Header />
-      <Main />
+      <Routes>
+        <Route path='/' element={<Header />}>
+          <Route index element={<Main />} />
+          <Route path='country/:id' element={<CountryData />} />
+        </Route>
+      
+      </Routes>
     </>
   )
 }

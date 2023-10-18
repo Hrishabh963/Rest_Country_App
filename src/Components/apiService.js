@@ -11,3 +11,12 @@ export const fetchAllCountries = async() => {
         throw error;
     }
 };
+
+export const fetchCountryData = async(id) => {
+    try {
+        const response = await axios.get(`${baseURL}/alpha/${id}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

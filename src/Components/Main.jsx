@@ -6,6 +6,7 @@ import Error from './Error';
 import { fetchAllCountries } from './apiService';
 import Sort from './Sort';
 import { filterData, sortData } from './utility';
+import { useNavigate } from 'react-router-dom';
 
 const Main = () => {
   // State variables
@@ -16,10 +17,19 @@ const Main = () => {
   const [subRegion,setSubRegion] = useState('');
   const [sort,setSort] = useState('ascending');
   const [sortType,setSortType] = useState('');
+  const navigate = useNavigate();
   const [error, setError] = useState({
     error: false,
     errorMessage: undefined
   });
+
+//Handle Navigation
+const handleNavigation = (event)=>{
+  const div = event.target.closest('.country_item');
+  if(!div) return;
+  const divId = div.id;
+  navigate(`/country/${divId}`);
+}
 
   // Handle input change
   const handleChange = (value) => {
@@ -85,9 +95,9 @@ const Main = () => {
 
     {filteredData.length === 0 && countryData.length>0 && <Error message="Country Not Found" />}
 
-    <div className="flex flex-col items-center  w-screen desktop:items-stretch desktop:flex-row desktop:flex-wrap desktop:mt-0 desktop:mb-0 desktop:ml-auto desktop:mr-auto desktop:pl-8">
+    <section onClick={(event)=> handleNavigation(event)} className="flex flex-col items-center  w-screen desktop:items-stretch desktop:flex-row desktop:flex-wrap desktop:mt-0 desktop:mb-0 desktop:ml-auto desktop:mr-auto desktop:pl-8">
       {countryData.length>0 && !error.error && <CountriesContainer countryData={filteredData} />}
-    </div>
+    </section>
     
     </main>
     </>
