@@ -38,7 +38,7 @@ const CountryData = () => {
   const country = {...countryInfo[0]};
 
   return (
-    <section className='min-h-[90vh] bg-Very_Light_Gray flex flex-col w-[100vw] pl-4 pt-10 desktop:pl-16 dark:bg-Very_Dark_Blue'>
+    <section className='min-h-[90vh] bg-Very_Light_Gray flex flex-col w-[100vw] pl-5 pt-10 desktop:pl-16 dark:bg-Very_Dark_Blue'>
       {loading ? <Loading /> : null }
       <div className='flex justify-start'>
       {!loading && <button type="button" className='bg-White text-sm font-light text-Very_Dark_Blue_Light_text dark:text-White dark:bg-Dark_Blue bg-arrow_light_mode bg-no-repeat bg-[center_left_1.2rem] dark:bg-arrow_dark_mode  px-14  py-3  rounded-md drop-shadow-lg shadow-inner' onClick={handleNavigation}>Back</button>}
