@@ -12,6 +12,7 @@ export const fetchAllCountries = async() => {
     }
 };
 
+//Function to  fetch individual country
 export const fetchCountryData = async(id) => {
     try {
         const response = await axios.get(`${baseURL}/alpha/${id}`);

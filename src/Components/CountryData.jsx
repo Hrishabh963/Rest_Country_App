@@ -5,6 +5,7 @@ import Error from './Error'
 import CountryDetails from './CountryComponents/CountryDetails';
 import Loading from './Loading';
 const CountryData = () => {
+  //States
   const {id} = useParams();
   const [countryInfo,setCountryInfo] = useState([]);
   const [loading,setLoading] = useState(true);
@@ -40,7 +41,7 @@ const CountryData = () => {
     <section className='min-h-[90vh] bg-Very_Light_Gray flex flex-col w-[100vw] pl-4 pt-10 desktop:pl-16 dark:bg-Very_Dark_Blue'>
       {loading ? <Loading /> : null }
       <div className='flex justify-start'>
-      {!loading && <button type="button" className='bg-White text-sm font-light text-Very_Dark_Blue_Light_text dark:text-White dark:bg-Dark_Blue px-10 py-3 rounded-lg drop-shadow-md shadow-inner' onClick={handleNavigation}>← Back</button>}
+      {!loading && <button type="button" className='bg-White text-sm font-light text-Very_Dark_Blue_Light_text dark:text-White dark:bg-Dark_Blue bg-arrow_light_mode bg-no-repeat bg-[center_left_1.2rem] dark:bg-arrow_dark_mode  px-14  py-3  rounded-md drop-shadow-lg shadow-inner' onClick={handleNavigation}>Back</button>}
       </div>
       <div className='flex flex-col desktop:flex-row min-h-[60vh] pt-24'>
         {error.error && !loading && <Error message={error.errorMessage} />}

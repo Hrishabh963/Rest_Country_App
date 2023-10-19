@@ -1,3 +1,4 @@
+//Separated logic for filtering data
 export const filterData = (countryData, currentRegion, subRegion, input) => {
     const filteredData = countryData.filter((country) => { //Filter based on region
             const region = country.region.toLowerCase();
@@ -20,6 +21,7 @@ export const filterData = (countryData, currentRegion, subRegion, input) => {
     return filteredData;
 }
 
+//Separated sort logic.
 export const sortData = (filteredData, sortType, sort) => {
     if (sortType !== '') { //Sorting the data 
         filteredData.sort((a, b) => {

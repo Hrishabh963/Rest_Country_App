@@ -2,8 +2,13 @@ import React from 'react'
 import Select from './Select'
 
 const Input = ({handleChange,handleSelect,handleSubRegionSelect,countryData,region}) => {
+  //Store regions dynamically
   const continents = [...new Set(countryData.map(country=>country.region))];
+
+  //Store subregions dynamically based on selected region
   const subRegions = [...new Set(countryData.filter((country)=>country.region === region).map(country=>country.subregion!==undefined ? country.subregion : null))]
+
+  //JSX render logic
   return (
     <div className='flex flex-col w-[95vw] justify-between pl-4 desktop:flex-row desktop:pl-16 bg-White dark:bg-Very_Dark_Blue pb-4'>
       <div className='my-8 desktop:basis-[40%]'>

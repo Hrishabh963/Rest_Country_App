@@ -79,6 +79,7 @@ const handleNavigation = (event)=>{
   // Filter country data based on user input
   let filteredData = filterData(countryData,currentRegion,subRegion,input);
   filteredData = sortData(filteredData,sortType,sort); 
+
  // JSX rendering logic
   return (
     <>
@@ -94,7 +95,7 @@ const handleNavigation = (event)=>{
 
     {filteredData.length === 0 && countryData.length>0 && <Error message="Country Not Found" />}
 
-    <section onClick={(event)=> handleNavigation(event)} className="flex flex-col items-center  w-screen desktop:items-stretch desktop:flex-row desktop:flex-wrap desktop:mt-0 desktop:mb-0 desktop:ml-auto desktop:mr-auto desktop:pl-8">
+    <section onClick={(event)=> handleNavigation(event)} className="flex flex-col items-center  w-[99vw] desktop:items-stretch desktop:flex-row desktop:flex-wrap desktop:mt-0 desktop:mb-0 desktop:ml-auto desktop:mr-auto desktop:pl-8">
       {countryData.length>0 && !error.error && <CountriesContainer countryData={filteredData} />}
     </section>
     
