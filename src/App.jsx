@@ -12,7 +12,6 @@ const App = () => {
           <Route index element={<Main />} />
           <Route path='country/:id' element={<CountryData />} />
         </Route>
-      
       </Routes>
     </>
   )
