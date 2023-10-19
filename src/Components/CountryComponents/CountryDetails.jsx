@@ -1,5 +1,6 @@
-const CountryDetails = ({country}) => {
+import Border from "./Border";
 
+const CountryDetails = ({country}) => {
   const getNativeName = ()=>{
     for (const lang in country.name.nativeName) {
         return country.name.nativeName[lang].common;
@@ -48,7 +49,9 @@ const CountryDetails = ({country}) => {
             <p>Languages:{languages} <span></span></p>
         </div>
     </div>
-    <div></div>
+    <div>
+        {country.borders && <Border borderCountries={country.borders} />}
+    </div>
     </div> 
     </>
   )

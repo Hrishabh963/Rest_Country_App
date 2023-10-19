@@ -32,7 +32,7 @@ const CountryData = () => {
       setError({error : true , errorMessage:error.message})
       setLoading(false);
     })
-  },[])
+  },[id])
 
   const country = {...countryInfo[0]};
 
