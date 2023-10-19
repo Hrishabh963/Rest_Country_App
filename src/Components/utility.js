@@ -25,14 +25,14 @@ export const sortData = (filteredData, sortType, sort) => {
         filteredData.sort((a, b) => {
             if (sortType === 'population') { //Sort by population
                 if (sort === 'ascending') {
-                    return a.population > b.population;
+                    return a.population > b.population ? 1 : -1;
                 }
-                return a.population < b.population;
+                return a.population < b.population ? 1 : -1;
             } else { //Sort by area
                 if (sort === 'ascending') {
-                    return a.area > b.area;
+                    return a.area > b.area ? 1 : -1;
                 }
-                return a.area < b.area;
+                return a.area < b.area ? 1 : -1;
             }
         })
     }

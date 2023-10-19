@@ -79,7 +79,6 @@ const handleNavigation = (event)=>{
   // Filter country data based on user input
   let filteredData = filterData(countryData,currentRegion,subRegion,input);
   filteredData = sortData(filteredData,sortType,sort); 
-    
  // JSX rendering logic
   return (
     <>
