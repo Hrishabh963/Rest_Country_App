@@ -5,7 +5,7 @@ export const filterData = (countryData, currentRegion, subRegion, input) => {
             return region.includes(userRegion);
         })
         .filter((country) => { //Filter based on Input
-            const name = country.name.official.toLowerCase();
+            const name = country.name.common.toLowerCase();
             const userInput = input.toLowerCase();
             return name.includes(userInput);
         })
